@@ -2,30 +2,34 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export const NewContact = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
+  const [contact, setContact] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    address: "",
+  });
 
   const Submit = (event) => {
     event.preventDefault();
   };
 
+  const HandleChange = (e) => {
+    setContact({
+      ...contact,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const CreateNewContact = () => {
     if (
-      name.trim() !== "" &&
-      email.trim() !== "" &&
-      phone.trim() !== "" &&
-      address.trim() !== ""
+      contact.name.trim() !== "" &&
+      contact.email.trim() !== "" &&
+      contact.phone.trim() !== "" &&
+      contact.address.trim() !== ""
     ) {
       fetch("https://playground.4geeks.com/contact/agendas/andres/contacts", {
         method: "POST",
-        body: JSON.stringify({
-          name: name,
-          phone: phone,
-          email: email,
-          address: address,
-        }),
+        body: JSON.stringify(contact),
         headers: {
           "Content-Type": "application/json",
         },
@@ -38,7 +42,7 @@ export const NewContact = () => {
           (response) => console.log("Success:", response),
           alert("Contact created successfully")
         )
-        .then(() => setAddress(""), setEmail(""), setName(""), setPhone(""))
+        .then(() => setContact({ name: "", phone: "", email: "", address: "" }))
         .catch((error) => console.error(error));
     }
   };
@@ -53,12 +57,11 @@ export const NewContact = () => {
           </label>
           <input
             type="text"
+            name="name"
             className="form-control"
             id="fullname"
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-            value={name}
+            onChange={HandleChange}
+            value={contact.name}
             required
           />
         </div>
@@ -68,12 +71,11 @@ export const NewContact = () => {
           </label>
           <input
             type="email"
+            name="email"
             className="form-control"
             id="email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-            value={email}
+            onChange={HandleChange}
+            value={contact.email}
             required
           />
         </div>
@@ -83,12 +85,11 @@ export const NewContact = () => {
           </label>
           <input
             type="tel"
+            name="phone"
             className="form-control"
             id="phonenumber"
-            onChange={(e) => {
-              setPhone(e.target.value);
-            }}
-            value={phone}
+            onChange={HandleChange}
+            value={contact.phone}
             required
           />
         </div>
@@ -98,12 +99,11 @@ export const NewContact = () => {
           </label>
           <input
             type="text"
+            name="address"
             className="form-control"
             id="address"
-            onChange={(e) => {
-              setAddress(e.target.value);
-            }}
-            value={address}
+            onChange={HandleChange}
+            value={contact.address}
             required
           />
         </div>
