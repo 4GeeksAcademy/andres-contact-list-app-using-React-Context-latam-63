@@ -6,18 +6,11 @@ export const Navbar = () => {
       <div className="container">
         <div className="ml-auto">
         </div>
-        <Link to="/agenda">
+        <Link to="/">
           <button type="button" className="btn btn-danger">
             Go to Agenda
           </button>
         </Link>
-        <div>
-          <Link to="/new-contact">
-            <button type="button" className="btn btn-success">
-              Create new contact
-            </button>
-          </Link>
-        </div>
       </div>
     </nav>
   );

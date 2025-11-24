@@ -8,7 +8,6 @@ import {
 import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
 import { Single } from "./pages/Single";
-
 import { Agenda } from "./pages/Agenda";
 import { NewContact } from "./pages/NewContact";
 
@@ -23,7 +22,7 @@ export const router = createBrowserRouter(
     // Root Route: All navigation will start from here.
     <Route path="/" element={<Layout />} errorElement={<h1>Not found!</h1>}>
       {/* Nested Routes: Defines sub-routes within the BaseHome component. */}
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Agenda />} />
       <Route path="/single/:theId" element={<Single />} />{" "}
       {/* Dynamic route for single items */}
       <Route path="/agenda" element={<Agenda />} />

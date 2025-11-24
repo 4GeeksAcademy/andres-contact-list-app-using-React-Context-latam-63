@@ -1,3 +1,8 @@
 .contact {
   border: none;
 }
+
+.delete-icon:hover,
+.edit-icon:hover {
+  cursor: pointer;
+}

@@ -7,21 +7,21 @@ export const Agenda = () => {
   const [contactList, setContactList] = useState([]);
   const Api_URL = "https://playground.4geeks.com/contact";
 
-  const DisplayList = () => {
-    fetch(Api_URL + "/agendas")
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log("Looks like there was a problem: \n", error);
-      });
-  };
+  // const DisplayList = () => {
+  //   fetch(Api_URL + "/agendas")
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw Error(response.statusText);
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       console.log(data);
+  //     })
+  //     .catch((error) => {
+  //       console.log("Looks like there was a problem: \n", error);
+  //     });
+  // };
 
   const CreateAgenda = () => {
     fetch(Api_URL + "/agendas/andres", {
@@ -67,27 +67,27 @@ export const Agenda = () => {
 
   useEffect(() => {
     CreateAgenda();
-    DisplayList();
+    // DisplayList();
     CheckAgenda();
   }, []);
 
   return (
     <>
       <div className="container">
+        <div className="row d-flex">
+          <div className="col-md-4 ms-auto text-end me-3 mt-3">
+            <Link to="/new-contact">
+              <button type="button" className="btn btn-success">
+                Create new contact
+              </button>
+            </Link>
+          </div>
+        </div>
         <ul className="list-group list-group-flush col-md-12">
           {contactList.map((item) => {
-            return (
-              <ContactCard item={item} />
-            );
+            return <ContactCard item={item} />;
           })}
         </ul>
-        <div className="row">
-          <Link to="/">
-            <button type="button" className="btn btn-warning">
-              Go Back
-            </button>
-          </Link>
-        </div>
       </div>
     </>
   );

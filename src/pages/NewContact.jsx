@@ -62,6 +62,7 @@ export const NewContact = () => {
             id="fullname"
             onChange={HandleChange}
             value={contact.name}
+            placeholder="Full name"
             required
           />
         </div>
@@ -76,6 +77,7 @@ export const NewContact = () => {
             id="email"
             onChange={HandleChange}
             value={contact.email}
+            placeholder="Enter email"
             required
           />
         </div>
@@ -90,6 +92,7 @@ export const NewContact = () => {
             id="phonenumber"
             onChange={HandleChange}
             value={contact.phone}
+            placeholder="Enter Phone number"
             required
           />
         </div>
@@ -104,6 +107,7 @@ export const NewContact = () => {
             id="address"
             onChange={HandleChange}
             value={contact.address}
+            placeholder="Enter address"
             required
           />
         </div>
