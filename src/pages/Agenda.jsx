@@ -74,10 +74,11 @@ export const Agenda = () => {
   return (
     <>
       <div className="container">
+        <div className="col-12 text-center"><h1>Contacts</h1></div>
         <div className="row d-flex">
-          <div className="col-md-4 ms-auto text-end me-3 mt-3">
+          <div className="col-md-4 ms-auto text-end  mt-3">
             <Link to="/new-contact">
-              <button type="button" className="btn btn-success">
+              <button type="button" className="btn btn-success me-3">
                 Create new contact
               </button>
             </Link>

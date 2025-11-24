@@ -28,7 +28,7 @@ export const ContactCard = ({ item }) => {
       <li key={item.id} className="list-group-item contact mt-0">
         <div className="card mb-0 ms-auto me-auto" style={{ maxWidth: "100%" }}>
           <div className="row g-0">
-            <div className="col-md-2">
+            <div className="col-sm-4 col-md-4 col-lg-2">
               <img
                 src="https://picsum.photos/200/200"
                 className="img-fluid rounded-circle profile-pic object-fit-cover p-3"

@@ -119,7 +119,7 @@ export const NewContact = () => {
           >
             Add Contact
           </button>
-          <Link to="/agenda">
+          <Link to="/">
             <p className="mt-2">Return to Contacts</p>
           </Link>
         </div>
