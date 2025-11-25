@@ -1,12 +1,20 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import useGlobalReducer from "../hooks/useGlobalReducer";
 
-export const NewContact = (props) => {
+export const EditContact = (props) => {
+  const { store } = useGlobalReducer();
+  const { ContactId } = useParams();
+  const singleContact = store.contacts.find(
+    (contact) => contact.id === parseInt(ContactId)
+  );
+
   const [contact, setContact] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    address: "",
+    name: singleContact.name,
+    phone: singleContact.phone,
+    email: singleContact.email,
+    address: singleContact.address,
+    id: singleContact.id,
   });
 
   const Submit = (event) => {
@@ -20,29 +28,31 @@ export const NewContact = (props) => {
     });
   };
 
-  const CreateNewContact = () => {
+  const EditExistingContact = () => {
     if (
       contact.name.trim() !== "" &&
       contact.email.trim() !== "" &&
       contact.phone.trim() !== "" &&
       contact.address.trim() !== ""
     ) {
-      fetch("https://playground.4geeks.com/contact/agendas/andres/contacts", {
-        method: "POST",
-        body: JSON.stringify(contact),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      fetch(
+        `https://playground.4geeks.com/contact/agendas/andres/contacts/${contact.id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(contact),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
         .then((res) => {
           if (!res.ok) throw Error(res.statusText);
-          return res.json();
+          return res;
         })
         .then(
           (response) => console.log("Success:", response),
-          alert("Contact created successfully")
+          alert("Contact edited successfully")
         )
-        .then(() => setContact({ name: "", phone: "", email: "", address: "" }))
         .catch((error) => console.error(error));
     }
   };
@@ -50,7 +60,7 @@ export const NewContact = (props) => {
   return (
     <>
       <form className="container mt-3" onSubmit={Submit}>
-        <h1 className=" text-center mb-3">Add new contact</h1>
+        <h1 className=" text-center mb-3">Edit Contact</h1>
         <div className="mb-3 col-7 ms-auto me-auto">
           <label for="exampleInputEmail1" className="form-label">
             Full Name
@@ -115,7 +125,7 @@ export const NewContact = (props) => {
           <button
             type="submit"
             className="btn btn-primary col-12"
-            onClick={CreateNewContact}
+            onClick={EditExistingContact}
           >
             Save
           </button>
