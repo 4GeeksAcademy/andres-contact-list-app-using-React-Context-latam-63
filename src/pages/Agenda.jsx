@@ -7,22 +7,31 @@ export const Agenda = () => {
   const { store, dispatch } = useGlobalReducer();
   const Api_URL = "https://playground.4geeks.com/contact";
 
+  const GetAgenda = () => {
+    fetch(Api_URL + "/agendas/andres")
+      .then((resp) => {
+        if (!resp.ok) {
+          CreateAgenda();
+        }
+        return resp;
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const CreateAgenda = () => {
     fetch(Api_URL + "/agendas/andres", {
       method: "POST",
-      body: JSON.stringify({ slug: "andres" }),
-      headers: {
-        "Content-Type": "application/json",
-      },
     })
       .then((response) => {
         if (!response.ok) {
           throw Error(response.statusText);
         }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
+        return response;
       })
       .catch((error) => {
         console.log("Looks like there was a problem: \n", error);
@@ -32,9 +41,6 @@ export const Agenda = () => {
   const DisplayAgenda = () => {
     fetch(Api_URL + "/agendas/andres/contacts")
       .then((response) => {
-        if (!response.ok) {
-          CreateAgenda();
-        }
         return response.json();
       })
       .then((data) => {
@@ -71,7 +77,8 @@ export const Agenda = () => {
   };
 
   useEffect(() => {
-    DisplayAgenda();
+    GetAgenda();
+    setTimeout(DisplayAgenda(), 5000);
   }, []);
 
   return (

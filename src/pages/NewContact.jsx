@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const NewContact = (props) => {
   const [contact, setContact] = useState({
@@ -8,6 +9,8 @@ export const NewContact = (props) => {
     email: "",
     address: "",
   });
+
+  const navigate = useNavigate();
 
   const Submit = (event) => {
     event.preventDefault();
@@ -115,7 +118,9 @@ export const NewContact = (props) => {
           <button
             type="submit"
             className="btn btn-primary col-12"
-            onClick={CreateNewContact}
+            onClick={() => {
+              CreateNewContact(), navigate("/");
+            }}
           >
             Save
           </button>

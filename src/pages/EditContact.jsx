@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
+import { useNavigate } from "react-router-dom";
 
 export const EditContact = (props) => {
   const { store } = useGlobalReducer();
@@ -16,6 +17,8 @@ export const EditContact = (props) => {
     address: singleContact.address,
     id: singleContact.id,
   });
+
+  const navigate = useNavigate();
 
   const Submit = (event) => {
     event.preventDefault();
@@ -125,7 +128,9 @@ export const EditContact = (props) => {
           <button
             type="submit"
             className="btn btn-primary col-12"
-            onClick={EditExistingContact}
+            onClick={() => {
+              EditExistingContact(), navigate("/");
+            }}
           >
             Save
           </button>

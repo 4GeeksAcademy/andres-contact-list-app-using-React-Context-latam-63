@@ -6,3 +6,7 @@
 .edit-icon:hover {
   cursor: pointer;
 }
+
+.edit-icon {
+  color: black;
+}
