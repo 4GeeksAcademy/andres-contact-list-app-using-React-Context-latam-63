@@ -12,11 +12,11 @@ export const Agenda = () => {
       .then((resp) => {
         if (!resp.ok) {
           CreateAgenda();
-
-          setTimeout(() => DisplayAgenda(), 3000);
+          setTimeout(() => DisplayAgenda(), 5000);
         }
         return resp;
-      }).then(()=> DisplayAgenda())
+      })
+      .then(() => DisplayAgenda())
       .catch((error) => {
         console.log(error);
       });
@@ -78,6 +78,25 @@ export const Agenda = () => {
     GetAgenda();
   }, []);
 
+  if (store.contacts.length === 0) {
+    return (
+      <>
+        <div className="container">
+          <h1 className="text-center mt-3">Contacts</h1>
+          <div className="row d-flex">
+            <div className="col-md-4 ms-auto text-end">
+              <Link to="/new-contact">
+                <button type="button" className="btn btn-success me-3 mt-5">
+                  Create new contact
+                </button>
+              </Link>
+            </div>
+          </div>
+          <h2 className="text-center mt-5">No contacts please add one</h2>
+        </div>
+      </>
+    );
+  }
   return (
     <>
       <div className="container">
