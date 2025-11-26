@@ -12,6 +12,8 @@ export const Agenda = () => {
       .then((resp) => {
         if (!resp.ok) {
           CreateAgenda();
+
+          setTimeout(() => DisplayAgenda(), 3000);
         }
         return resp;
       })
@@ -74,7 +76,6 @@ export const Agenda = () => {
 
   useEffect(() => {
     GetAgenda();
-    setTimeout(DisplayAgenda(), 5000);
   }, []);
 
   return (
