@@ -14,6 +14,8 @@ export const initialStore = () => {
       },
     ],
     contacts: [],
+
+    deleteId: null,
   };
 };
 
@@ -32,6 +34,17 @@ export default function storeReducer(store, action = {}) {
       return {
         ...store,
         contacts: action.payload,
+      };
+    case "set_delete_id":
+      return {
+        ...store,
+        deleteId: action.payload,
+      };
+
+    case "reset_delete_id":
+      return {
+        ...store,
+        deleteId: 0,
       };
     default:
       throw Error("Unknown action.");

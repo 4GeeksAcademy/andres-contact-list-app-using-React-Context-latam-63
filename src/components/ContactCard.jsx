@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import useGlobalReducer from "../hooks/useGlobalReducer";
 
 export const ContactCard = (props) => {
+  const { store, dispatch } = useGlobalReducer();
+
   const CapitalizeWords = (string) => {
     return string
       .split(" ")
@@ -52,48 +55,13 @@ export const ContactCard = (props) => {
                 className="fa-solid fa-trash-can delete-icon"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
+                onClick={() =>
+                  dispatch({
+                    type: "set_delete_id",
+                    payload: props.id,
+                  })
+                }
               ></i>
-
-              <div
-                className="modal fade"
-                id="exampleModal"
-                tabindex="-1"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-              >
-                <div className="modal-dialog">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <button
-                        type="button"
-                        className="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      ></button>
-                    </div>
-                    <div className="modal-body">
-                      Are you sure you want to delete this contact?
-                    </div>
-                    <div className="modal-footer">
-                      <button
-                        type="button"
-                        className="btn btn-secondary"
-                        data-bs-dismiss="modal"
-                      >
-                        Cancel
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-danger"
-                        onClick={() => props.delete(props.item.id)}
-                        data-bs-dismiss="modal"
-                      >
-                        Delete Contact
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

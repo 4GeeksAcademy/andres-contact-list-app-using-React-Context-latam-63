@@ -15,9 +15,6 @@ export const Agenda = () => {
         }
         return resp;
       })
-      .then((data) => {
-        console.log(data);
-      })
       .catch((error) => {
         console.log(error);
       });
@@ -44,7 +41,6 @@ export const Agenda = () => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         dispatch({
           type: "getcontacts",
           payload: data.contacts,
@@ -96,9 +92,59 @@ export const Agenda = () => {
         </div>
         <ul className="list-group list-group-flush col-md-12">
           {store.contacts.map((item) => {
-            return <ContactCard item={item} delete={DeleteContact} />;
+            return (
+              <ContactCard
+                item={item}
+                delete={DeleteContact}
+                id={item.id}
+                key={item.id}
+              />
+            );
           })}
         </ul>
+      </div>
+      <div
+        className="modal fade"
+        id="exampleModal"
+        tabIndex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              Are you sure you want to delete this contact?
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={() => {
+                  DeleteContact(store.deleteId);
+                  console.log(store.deleteId);
+                }}
+                data-bs-dismiss="modal"
+              >
+                Delete Contact
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
