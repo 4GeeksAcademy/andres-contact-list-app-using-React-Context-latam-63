@@ -16,7 +16,7 @@ export const Agenda = () => {
           setTimeout(() => DisplayAgenda(), 3000);
         }
         return resp;
-      })
+      }).then(()=> DisplayAgenda())
       .catch((error) => {
         console.log(error);
       });
